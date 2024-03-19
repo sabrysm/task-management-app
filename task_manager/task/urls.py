@@ -10,5 +10,7 @@ urlpatterns = [
     path('in-progress/<int:id>/', views.in_progress, name='in_progress'),
     path('completed/<int:id>/', views.completed, name='completed'),
     path('update/<int:id>/', views.update, name='update'),
-    path('delete_all', views.delete_all, name='delete_all'),
+    path('delete/<int:id>/', views.delete, name='delete'),
+    path('reset_all', views.reset_all, name='reset_all'),
+    path('new_category/', views.new_category, name='new_category'),
 ]

@@ -1,52 +1,148 @@
 {% include 'core/base.html' %}
 {% block content %}
-<!--To Do's | in-progess | completed-->
-<div class="container bg-slate-300 font-sans text-center text-2xl font-bold text-white w-full mx-auto">
-    <!--Add task-->
-    <div class="flex justify-center items-center space-x-4 mt-5">
-        <form action="{% url 'task:create' %}" method="post">
-            {% csrf_token %}
-            <input type="text" name="title" placeholder="Add a task.." class="rounded-md p-2 font-light text-gray-950">
-            <!--category dropdown-->
-            <select name="category" class="rounded-md p-2 font-light text-gray-950">
-                <option value="Study">Study</option>
-                <option value="Work">Work</option>
-                <option value="Personal">Personal</option>
-                <option value="Others">Others</option>
-            </select>
-            <button type="submit" class="bg-[#447438] text-white font-normal rounded-md p-2">Add</button>
-            <button type="reset" class="bg-slate-500 text-white font-normal rounded-md p-2">Reset</button>
-            <a href="{% url 'task:delete_all' %}" class="bg-red-500 text-white font-normal rounded-md p-2">Delete All</a>
-        </form>
+<div class="container bg-slate-300 font-sans text-center text-2xl font-bold text-slate-200 w-screen">
+    <div class="flex flex-col md:flex-row justify-around items-center space-x-3 bg-[#0a131a] p-4 w-screen">
+        <!--Add task-->
+        <div class="flex justify-start items-center space-x-4 mt-5">
+            <form action="{% url 'task:create' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="title" placeholder="Add a task.."
+                    class="rounded-md p-1 font-light text-slate-200 bg-[#1d2e3e] outline-none">
+                <!--category dropdown-->
+                <select name="category" class="rounded-md p-1 font-light text-slate-200 outline-none bg-[#1d2e3e]">
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit"
+                    class="bg-[#1d2e3e] text-slate-200 font-normal rounded-md p-1 hover:bg-green-700 h-10">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-slate-200 hover:text-slate-100 transform hover:scale-110"
+                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path
+                            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                    </svg>
+                </button>
+                <button type="reset" class="bg-[#1d2e3e] text-slate-200 font-normal rounded-md p-1 w-24">Reset</button>
+                <a href="{% url 'task:reset_all' %}"
+                    class="bg-[#1d2e3e] text-slate-200 font-normal rounded-md p-1 w-24 hover:bg-red-900">Reset All</a>
+            </form>
+        </div>
+        <!--New Category-->
+        <div class="flex justify-end items-center space-x-4 mt-5">
+            <form action="{% url 'task:new_category' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="category" placeholder="Add a category.."
+                    class="rounded-md p-1 outline-none font-light text-slate-200 bg-[#1d2e3e]">
+                <button type="submit"
+                    class="bg-[#1d2e3e] text-slate-200 font-normal rounded-md p-1 hover:bg-green-700 h-10">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-slate-200 hover:text-slate-100 transform hover:scale-110"
+                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path
+                            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                    </svg>
+                </button>
+                <button type="reset" class="bg-[#1d2e3e] text-slate-200 font-normal rounded-md p-1 w-24">Reset</button>
+            </form>
+        </div>
     </div>
-    <div class="flex flex-row justify-around space-x-4 mt-5">
+    <div class="flex flex-row justify-around space-x-4 mt-5 text-black font-normal mx-auto">
         <div class="col-md-4 w-4/12">
-            <h2>To Do's</h2>
+            <h2 class="mb-1 md:mb-5">To Do's</h2>
+            <div class="border-t-2 border-[#3b6674] w-1/2 mx-auto"></div>
             <ul class="list-group">
                 {% for task in tasks_todo %}
-                <li class="list-group-item bg-[#4c5c9222] rounded-md p-4 my-3 font-normal w-full">
-                    <a href="{% url 'task:in_progress' task.id %}">{{ task.title }}</a>
+                <li class="my-3">
+                    <div class="relative border-2 border-[#3b6674] bg-slate-200 p-4 rounded-sm">
+                        <!--Category-->
+                        <div  class="border-t-[63px] border-t-[#204e5e] border-r-[72px] border-r-transparent absolute top-0 left-0">
+                            <span
+                                class="text-sm text-slate-200 font-light transform -rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pl-20 pb-5">
+                                {{ task.category }}
+                            </span>
+                        </div>
+                        <!--Task Title-->
+                        <div class="pl-8">
+                            <a href=" {% url 'task:in_progress' task.id %}">{{ task.title }}</a>
+                        </div>
+                        <!--Delete Task-->
+                        <a href="{% url 'task:delete' task.id %}"
+                            class="text-slate-200 bg-transparent font-bold group-hover:cursor-pointer group group-hover:block absolute top-3 right-0 p-2 h-full">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="hidden group-hover:block h-6 w-6 text-slate-200 hover:text-slate-100 transform hover:scale-110"
+                                viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                <path
+                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                            </svg>
+                        </a>
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
         </div>
         <div class="col-md-4 w-4/12">
-            <h2 class="text-[#ddbf73]">In Progress</h2>
+            <h2 class="text-[#c9a549] mb-1 md:mb-5">In Progress</h2>
+            <div class="border-t-2 border-[#9e7f31] w-1/2 mx-auto"></div>
             <ul class="list-group">
                 {% for task in tasks_in_progress %}
-                <li class="list-group-item bg-[#ddbf73] rounded-md p-4 my-3 font-normal">
-                    <a href="{% url 'task:completed' task.id %}">{{ task.title }}</a>
+                <li class="my-3">
+                    <div class="relative border-2 border-[#ddbf73] bg-slate-200 p-4 rounded-sm">
+                        <!--Category-->
+                        <div class="border-t-[63px] border-t-[#9e7f31] border-r-[72px] border-r-transparent absolute top-0 left-0">
+                            <span
+                                class="text-sm text-slate-200 font-light transform -rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pl-20 pb-5">
+                                {{ task.category }}
+                            </span>
+                        </div>
+                        <div class="pl-8">
+                            <!--Task Title-->
+                            <a href=" {% url 'task:completed' task.id %}">{{ task.title }}</a>
+                        </div>
+                        <!--Delete Task-->
+                        <a href="{% url 'task:delete' task.id %}"
+                            class="text-slate-200 bg-transparent font-bold group-hover:cursor-pointer group group-hover:block absolute top-3 right-0 p-2 h-full">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="hidden group-hover:block h-6 w-6 text-slate-200 hover:text-slate-100 transform hover:scale-110"
+                                viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                <path
+                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                            </svg>
+                        </a>
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
         </div>
-        <div class="col-md-4 w-4/12 ">
-            <h2 class="text-[#447438]">Completed</h2>
+        <div class="col-md-4 w-4/12">
+            <h2 class="text-[#447438] mb-1 md:mb-5">Completed</h2>
+            <div class="border-t-2 border-[#205e38] w-1/2 mx-auto"></div>
             <ul class="list-group
             ">
                 {% for task in tasks_completed %}
-                <li class="list-group-item bg-[#447438] rounded-md p-4 my-3 font-normal">
-                    <a href="">{{ task.title }}</a>
+                <li class="my-3">
+                    <div class="relative border-2 border-[#447438] bg-slate-200 p-4 rounded-sm">
+                        <!--Category-->
+                        <div class="border-t-[63px] border-t-[#205e38] border-r-[72px] border-r-transparent absolute top-0 left-0">
+                            <span
+                                class="text-sm text-slate-200 font-light transform -rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pl-20 pb-5">
+                                {{ task.category }}</span>
+                        </div>
+                        <!--Task Title-->
+                        <div class="pl-8">
+                            <a href=" {% url 'task:delete' task.id %}">{{ task.title }}</a>
+                        </div>
+                        <!--Delete Task-->
+                        <a href="{% url 'task:delete' task.id %}"
+                            class="text-slate-200 bg-transparent font-bold group-hover:cursor-pointer group group-hover:block absolute top-3 right-0 p-2 h-full">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="hidden group-hover:block h-6 w-6 text-slate-200 hover:text-slate-100 transform hover:scale-110"
+                                viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                <path
+                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                            </svg>
+                        </a>
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
@@ -54,3 +150,23 @@
     </div>
 </div>
 {% endblock %}
+<script>
+    const colorChange = document.getElementById('color-change');
+  
+    colorChange.addEventListener('mouseenter', () => {
+      setTimeout(() => {
+        colorChange.classList.remove('bg-blue-500');
+        colorChange.classList.add('bg-green-500');
+      }, 3000);
+  
+      setTimeout(() => {
+        colorChange.classList.remove('bg-green-500');
+        colorChange.classList.add('bg-red-500');
+      }, 5000);
+    });
+  
+    colorChange.addEventListener('mouseleave', () => {
+      // Reset color on mouse leave
+      colorChange.classList.remove('bg-green-500', 'bg-red-500');
+    });
+  </script>
