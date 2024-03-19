@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Task
+from django.utils import timezone
 
 def index(request):
     todos = Task.objects.filter(completed=False, in_progress=False).all()
@@ -21,6 +22,7 @@ def in_progress(request, id):
 def completed(request, id):
     task = Task.objects.get(id=id)
     task.completed = not task.completed
+    task.completed_at = timezone.now()
     task.in_progress = False
     task.save()
     return redirect('task:index')

@@ -7,6 +7,13 @@
         <form action="{% url 'task:create' %}" method="post">
             {% csrf_token %}
             <input type="text" name="title" placeholder="Add a task.." class="rounded-md p-2 font-light text-gray-950">
+            <!--category dropdown-->
+            <select name="category" class="rounded-md p-2 font-light text-gray-950">
+                <option value="Study">Study</option>
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Others">Others</option>
+            </select>
             <button type="submit" class="bg-[#447438] text-white font-normal rounded-md p-2">Add</button>
             <button type="reset" class="bg-slate-500 text-white font-normal rounded-md p-2">Reset</button>
             <a href="{% url 'task:delete_all' %}" class="bg-red-500 text-white font-normal rounded-md p-2">Delete All</a>
