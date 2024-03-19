@@ -1,9 +1,9 @@
 {% include 'core/base.html' %}
 {% block content %}
 <div class="flex flex-col justify-start items-center bg-[#0a131a] p-3 text-slate-100 w-screen h-screen md:pb-10">
-    <div class="flex flex-row justify-start items-start w-4/6 bg-[#1d2e3e] h-4/5">
+    <div class="flex flex-row justify-start items-start w-4/6 bg-[#1d2e3e] h-4/5 rounded-lg">
         <div class="flex flex-col justify-start items-center space-x-4 mt-5 text-black font-normal w-full">
-            <h2 class="text-[#447438] mb-1 md:mb-5 mx-auto font-semibold">Tasks done</h2>
+            <h2 class="text-[#447438] mb-1 md:mb-5 mx-auto font-semibold text-2xl font-serif text-center">Tasks done</h2>
             <div class="border-t-2 border-[#205e38] w-1/2 mx-auto"></div>
             <ul class="list-group w-2/5 mx-auto">
                 {% for completed_task in page %}
