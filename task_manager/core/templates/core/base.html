@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Task Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+
+<body class="bg-slate-300">
+    <nav class="flex justify-between items-center bg-slate-500 p-3 text-slate-100">
+        <h3>Task Manager</h3>
+        <ul class="flex mx-auto space-x-4">
+            <li><a href="/">Home</a></li>
+            <li><a href="/task">Tasks</a></li>
+        </ul>
+    </nav>
+    {% block content %}
+    {% endblock %}
+</body>
+
+<footer class="bg-slate-500 text-slate-100 p-3 text-center">
+    <p>&copy; 2024 Task Manager. All rights reserved.</p>
+</footer>
+</html>
