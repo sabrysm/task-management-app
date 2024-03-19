@@ -2,8 +2,8 @@
 
 A simple yet powerful task manager app built with Django. Manage your tasks efficiently with the ability to categorize them as "To Do," "In Progress," and "Completed."
 
-![Task Manager App Screenshot 1](https://i.imgur.com/e2OYsmd.png)
-![Task Manager App Screenshot 1](https://i.imgur.com/mU7621v.png)
+![Task Manager App Screenshot 1](https://i.imgur.com/qzNeEZD.png)
+![Task Manager App Screenshot 1](https://i.imgur.com/mgr9gDa.png)
 
 <!-- Note: This project i made for learning purpose without following any tutorial, the main purpose was to build a task manager app to help me manage my study and work tasks. (make a note inside the readme file to let the user know that this project is not following any tutorial and it's made for learning purpose organize the words as needed) -->
 
