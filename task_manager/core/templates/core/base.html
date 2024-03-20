@@ -8,18 +8,31 @@
 </head>
 
 
-<body class="bg-slate-700 mx-auto w-full">
-    <nav class="flex justify-center items-center bg-[#1d2e3e] p-3 text-slate-100">
-        <h3>Task Manager</h3>
-        <ul class="flex mx-auto space-x-4">
-            <li><a href="/">Home</a></li>
-            <li><a href="/task">Tasks</a></li>
-            <li><a href="{% url 'reporting:tasks_history' %}">History</a></li>
-        </ul>
+<body class="bg-slate-700 md:w-full">
+    <nav class="flex flex-col md:flex-row items-center bg-[#1d2e3e] p-3 text-slate-100">
+        <div class="flex flex-col md:flex-row justify-between items-center space-x-2 w-full">
+            <h1 class="text-2xl font-bold font-mono">Task Manager</h1>
+            <ul class="flex justify-end flex-col md:flex-row space-x-5">
+                <li class="hover:text-blue-500"><a href="{% url 'dashboard:index' %}">Dashboard</a></li>
+                <li class="hover:text-blue-500"><a href="{% url 'reporting:tasks_history' %}">History</a></li>
+                {% if user.is_authenticated %}                
+                <li class="text-slate-100">
+                    <a href="{% url 'accounts:logout' %}" class="text-slate-200 font-normal rounded-md py-2 px-3 w-30 bg-red-900 text-center">Logout</a>
+                </li>
+                {% else %}
+                <li class="text-slate-100">
+                    <a href="{% url 'accounts:login' %}" class="text-slate-200 font-normal rounded-md p-1 w-24 bg-blue-900 text-center">Login</a>
+                </li>
+                <li class="text-slate-100">
+                    <a href="{% url 'accounts:signup' %}" class="text-slate-200 font-normal rounded-md p-1 w-24 bg-blue-900 text-center">Register</a>
+                {% endif %}
+            </ul>
+        </div>
         {% block dashboard %}
         {% endblock %}
     </nav>
     {% block content %}
     {% endblock %}
 </body>
+
 </html>
