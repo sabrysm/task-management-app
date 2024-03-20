@@ -5,10 +5,6 @@ A simple yet powerful task manager app built with Django. Manage your tasks effi
 ![Task Manager App Screenshot 1](https://i.imgur.com/qzNeEZD.png)
 ![Task Manager App Screenshot 1](https://i.imgur.com/mgr9gDa.png)
 
-<!-- Note: This project i made for learning purpose without following any tutorial, the main purpose was to build a task manager app to help me manage my study and work tasks. (make a note inside the readme file to let the user know that this project is not following any tutorial and it's made for learning purpose organize the words as needed) -->
-
-
-
 ## Features
 
 - **Task Status:** Organize tasks into three categories: "To Do," "In Progress," and "Completed."
@@ -17,10 +13,9 @@ A simple yet powerful task manager app built with Django. Manage your tasks effi
 - **Responsive Design:** Accessible on various devices, including desktops, tablets, and mobile phones.
 - **Customizable:** Add and delete tasks as needed to suit your workflow.
 
-## Note:
-```
-This project was made for learning purposes without following any tutorial. The main purpose was to build a task manager app to help me manage my study and work tasks. What you see here is what I actually use to manage my tasks. :)
-```
+> Note:
+> This project was done for learning purposes without following any tutorial. The main purpose was to build a task manager app to help me manage my study and work tasks. What you see here is what I use > to manage my tasks. :)
+
 ## Technologies Used
 
 - Django
