@@ -1,16 +1,20 @@
 from django.shortcuts import render, redirect
+# user
+from django.contrib.auth.models import User
+from django.http import HttpResponseNotFound, HttpResponseServerError
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import Task, Category
-from reporting.models import TaskHistory
+from reporting.models import CompletedTask
 from django.utils import timezone
+import time
 
 @login_required
 def index(request):
-    todos = Task.objects.filter(completed=False, in_progress=False, user=request.user).all()
+    todos = Task.objects.filter(completed=False, in_progress=False, user=request.user)
     completed = Task.objects.filter(completed=True, user=request.user).order_by('-completed_at')
-    in_progress = Task.objects.filter(in_progress=True, user=request.user).all()
-    categories = Category.objects.filter(user=request.user).all()
+    in_progress = Task.objects.filter(in_progress=True, user=request.user)
+    categories = Category.objects.filter(user=request.user)
     context = {
         "tasks_todo": todos,
         "tasks_completed": completed,
@@ -28,13 +32,28 @@ def in_progress(request, id):
 
 @login_required
 def completed(request, id):
-    task = Task.objects.get(id=id, user=request.user)
-    task.completed = not task.completed
-    task.completed_at = timezone.now()
-    task.in_progress = False
-    task.save()
-    TaskHistory.objects.create(title=task.title, created_at=task.created_at, completed_at=task.completed_at, category=task.category, user=task.user)
-    return redirect('dashboard:index')
+    try:
+        task = Task.objects.get(id=id, user=request.user)
+        task.completed = not task.completed
+        task.completed_at = timezone.now()
+        task.in_progress = False
+        task.save()
+        if task.completed:
+            print("Task Category:", task.category)
+            print("Task User:", task.user)
+            CompletedTask.objects.create(title=task.title, created_at=task.created_at, completed_at=task.completed_at, category=task.category.name, user=task.user)
+        return redirect('dashboard:index')
+
+    except Task.DoesNotExist:
+        # Handle the case where the task does not exist
+        return HttpResponseNotFound("Task not found.")
+
+    except Exception as e:
+        # Print or log the exception for debugging
+        print(f"An error occurred: {e}")
+        # Return an HTTP response with a meaningful error message
+        return HttpResponseServerError("An error occurred while processing your request. Please try again later.")
+
 
 @login_required
 def create(request):
@@ -43,11 +62,10 @@ def create(request):
         if 'category' not in request.POST:
             category = Category.objects.create(user=request.user)
             category.save()
-            task = Task.objects.create(title=title, category=category, user=request.user)
-            task.save()
+            time.sleep(0.5)
+            Task.objects.create(title=title, category=category, user=request.user)
         else:
-            task = Task.objects.create(title=title, category=Category.objects.get(id=request.POST['category']), user=request.user)
-            task.save()
+            Task.objects.create(title=title, category=Category.objects.get(id=request.POST['category']), user=request.user)
     return redirect('dashboard:index')
 
 @login_required
