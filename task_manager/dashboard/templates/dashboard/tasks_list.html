@@ -1,35 +1,35 @@
 {% include 'core/base.html' %}
 {% block dashboard %}
-<div class="flex flex-col md:flex-row justify-around items-center space-x-3 bg-[#0a131a] p-4 w-screen">
+<div class="flex flex-col md:flex-row justify-around items-center space-x-3 bg-[#00040a] p-4 w-screen">
     <!--Welcome message to ask the user for tasks-->
-    <div class="flex flex-col justify-center items-center space-y-2">
-        <h1 class="text-2xl font-bold font-mono text-slate-200">Welcome, {{ user.username }}</h1>
-        <p class="text-slate-200">What tasks do you have today?</p>
+    <div class="flex flex-col justify-center items-center space-y-2 text-[#b9d1e8]">
+        <h1 class="text-2xl font-bold font-mono">Welcome, {{ user.username }}</h1>
+        <p>What tasks do you have today?</p>
     </div>
     <!--Add task-->
     <div class="flex justify-start items-center space-x-4 mt-5">
         <form action="{% url 'dashboard:create' %}" method="post" class="flex items-center space-x-2">
             {% csrf_token %}
             <input type="text" name="title" placeholder="Add a task.."
-                class="rounded-md p-1 font-light text-slate-200 bg-[#1d2e3e] outline-none w-[40%]">
+                class="rounded-md p-1 font-light text-[#9abad8] bg-[#0d1c2a] outline-none w-[40%]">
             <!--category dropdown-->
-            <select name="category" class="rounded-md p-1 font-light text-slate-200 outline-none bg-[#1d2e3e] focus:bg-[#2f5170]">
+            <select name="category" class="rounded-md p-1 font-light text-[#9abad8] outline-none bg-[#0d1c2a] focus:bg-[#2f5170]">
                 {% for category in categories %}
                 <option value="{{ category.id }}">{{ category.name }}</option>
                 {% endfor %}
             </select>
             <!--Submit button-->
-            <button type="submit" class="bg-[#1d2e3e] text-slate-200 font-normal rounded-md p-1 hover:bg-green-700">
+            <button type="submit" class="bg-[#0d1c2a] text-[#9abad8] font-normal rounded-md p-1 hover:bg-green-700">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6 text-slate-200 hover:text-slate-100 transform hover:scale-110"
+                    class="h-6 w-6 text-[#9abad8] hover:text-slate-100 transform hover:scale-110"
                     viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                     <path
                         d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
                 </svg>
             </button>
-            <button type="reset" class="bg-[#1d2e3e] text-slate-200 font-normal rounded-md p-1 w-24">Reset</button>
+            <button type="reset" class="bg-[#0d1c2a] text-[#9abad8] font-normal rounded-md p-1 w-24">Reset</button>
             <a href="{% url 'dashboard:reset_all' %}"
-                class="bg-[#1d2e3e] text-slate-200 font-normal rounded-md p-1 w-24 hover:bg-red-900 text-center">Reset
+                class="bg-[#0d1c2a] text-[#9abad8] font-normal rounded-md p-1 w-24 hover:bg-red-900 text-center">Reset
                 All</a>
         </form>
     </div>
@@ -38,36 +38,36 @@
         <form action="{% url 'dashboard:new_category' %}" method="post" class="flex items-center space-x-2">
             {% csrf_token %}
             <input type="text" name="category" placeholder="Add a category.."
-                class="rounded-md p-1 outline-none font-light text-slate-200 bg-[#1d2e3e]">
-            <button type="submit" class="bg-[#1d2e3e] text-slate-200 font-normal rounded-md p-1 hover:bg-green-700">
+                class="rounded-md p-1 outline-none font-light text-[#9abad8] bg-[#0d1c2a]">
+            <button type="submit" class="bg-[#0d1c2a] text-[#9abad8] font-normal rounded-md p-1 hover:bg-green-700">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6 text-slate-200 hover:text-slate-100 transform hover:scale-110"
+                    class="h-6 w-6 text-[#9abad8] hover:text-slate-100 transform hover:scale-110"
                     viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                     <path
                         d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
                 </svg>
             </button>
-            <button type="reset" class="bg-[#1d2e3e] text-slate-200 font-normal rounded-md p-1 w-24">Reset</button>
+            <button type="reset" class="bg-[#0d1c2a] text-[#9abad8] font-normal rounded-md p-1 w-24">Reset</button>
         </form>
     </div>
 </div>
 {% endblock %}
 {% block content %}
-<div class="container bg-slate-700 font-sans text-center text-2xl font-bold text-slate-200 w-screen mx-auto">
+<div class="container bg-inherit text-center text-2xl font-bold text-[#9abad8] w-screen mx-auto font-sans">
 
     <div class="flex flex-row justify-around space-x-4 mt-5 text-black font-normal mx-auto">
         <div class="col-md-4 w-4/12">
-            <h2 class="mb-1 md:mb-5 text-[#3b6674]">To Do's</h2>
+            <h2 class="mb-1 md:mb-5 text-[#88bcce]">To Do's</h2>
             <div class="border-t-2 border-[#3b6674] w-1/2 mx-auto"></div>
             <ul class="list-group">
                 {% for task in tasks_todo %}
                 <li class="my-3">
-                    <div class="relative border-2 border-[#3b6674] bg-slate-200 p-4 rounded-sm">
+                    <div class="relative border-2 border-[#3b6674] bg-[#0d1c2a] text-[#9abad8] p-4 rounded-sm">
                         <!--Category-->
                         <div
                             class="border-t-[63px] border-t-[#204e5e] border-r-[72px] border-r-transparent absolute top-0 left-0">
                             <span
-                                class="text-xs text-slate-200 font-light transform -rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pl-20 pb-9">
+                                class="text-xs text-[#9abad8] font-mono font-light transform -rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pl-20 pb-9">
                                 {{ task.category }}
                             </span>
                         </div>
@@ -77,9 +77,9 @@
                         </div>
                         <!--Delete Task-->
                         <a href="{% url 'dashboard:delete' task.id %}"
-                            class="text-slate-200 bg-transparent font-bold group-hover:cursor-pointer group group-hover:block absolute top-3 right-0 p-2 h-full">
+                            class="text-[#9abad8] bg-transparent font-bold group-hover:cursor-pointer group group-hover:block absolute top-3 right-0 p-2 h-full">
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="hidden group-hover:block h-6 w-6 text-slate-200 hover:text-slate-100 transform hover:scale-110"
+                                class="hidden group-hover:block h-6 w-6 text-[#9abad8] hover:text-slate-100 transform hover:scale-110"
                                 viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                 <path
                                     d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
@@ -91,17 +91,17 @@
             </ul>
         </div>
         <div class="col-md-4 w-4/12">
-            <h2 class="text-[#c9a549] mb-1 md:mb-5">In Progress</h2>
+            <h2 class="text-[#f9cb55] mb-1 md:mb-5">In Progress</h2>
             <div class="border-t-2 border-[#9e7f31] w-1/2 mx-auto"></div>
             <ul class="list-group">
                 {% for task in tasks_in_progress %}
                 <li class="my-3">
-                    <div class="relative border-2 border-[#ddbf73] bg-slate-200 p-4 rounded-sm">
+                    <div class="relative border-2 border-[#ddbf73] bg-[#0d1c2a] text-[#9abad8] p-4 rounded-sm">
                         <!--Category-->
                         <div
                             class="border-t-[63px] border-t-[#9e7f31] border-r-[72px] border-r-transparent absolute top-0 left-0">
                             <span
-                                class="text-xs text-slate-200 font-light transform -rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pl-20 pb-9">
+                                class="text-xs text-[#9abad8] font-mono font-light transform -rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pl-20 pb-9">
                                 {{ task.category }}
                             </span>
                         </div>
@@ -111,9 +111,9 @@
                         </div>
                         <!--Delete Task-->
                         <a href="{% url 'dashboard:delete' task.id %}"
-                            class="text-slate-200 bg-transparent font-bold group-hover:cursor-pointer group group-hover:block absolute top-3 right-0 p-2 h-full">
+                            class="text-[#9abad8] bg-transparent font-bold group-hover:cursor-pointer group group-hover:block absolute top-3 right-0 p-2 h-full">
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="hidden group-hover:block h-6 w-6 text-slate-200 hover:text-slate-100 transform hover:scale-110"
+                                class="hidden group-hover:block h-6 w-6 text-[#9abad8] hover:text-slate-100 transform hover:scale-110"
                                 viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                 <path
                                     d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
@@ -125,18 +125,18 @@
             </ul>
         </div>
         <div class="col-md-4 w-4/12">
-            <h2 class="text-[#447438] mb-1 md:mb-5">Completed</h2>
+            <h2 class="text-[#79c267] mb-1 md:mb-5">Completed</h2>
             <div class="border-t-2 border-[#205e38] w-1/2 mx-auto"></div>
             <ul class="list-group
             ">
                 {% for task in tasks_completed %}
                 <li class="my-3">
-                    <div class="relative border-2 border-[#447438] bg-slate-200 p-4 rounded-sm">
+                    <div class="relative border-2 border-[#447438] bg-[#0d1c2a] text-[#9abad8] p-4 rounded-sm">
                         <!--Category-->
                         <div
                             class="border-t-[63px] border-t-[#205e38] border-r-[72px] border-r-transparent absolute top-0 left-0">
                             <span
-                                class="text-xs text-slate-200 font-light transform -rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pl-20 pb-9">
+                                class="text-xs text-[#9abad8] font-mono font-light transform -rotate-45 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pl-20 pb-9">
                                 {{ task.category }}</span>
                         </div>
                         <!--Task Title-->
