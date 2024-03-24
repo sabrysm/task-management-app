@@ -12,7 +12,8 @@ import time
 @login_required
 def index(request):
     todos = Task.objects.filter(completed=False, in_progress=False, user=request.user)
-    completed = Task.objects.filter(completed=True, user=request.user).order_by('-completed_at')
+    # show today's completed tasks only starting from 00:00:00
+    completed = Task.objects.filter(completed=True, user=request.user).order_by('-completed_at').filter(completed_at__gte=timezone.now().replace(hour=0, minute=0, second=0, microsecond=0))
     in_progress = Task.objects.filter(in_progress=True, user=request.user)
     categories = Category.objects.filter(user=request.user)
     context = {
@@ -39,8 +40,6 @@ def completed(request, id):
         task.in_progress = False
         task.save()
         if task.completed:
-            print("Task Category:", task.category)
-            print("Task User:", task.user)
             CompletedTask.objects.create(title=task.title, created_at=task.created_at, completed_at=task.completed_at, category=task.category.name, user=task.user)
         return redirect('dashboard:index')
 
