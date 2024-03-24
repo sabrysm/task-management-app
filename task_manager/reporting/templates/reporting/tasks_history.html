@@ -24,30 +24,6 @@
                 </li>
                 {% endfor %}
             </ul>
-
-            <!-- Pagination links -->
-            {% if page.has_other_pages %}
-            <div class="flex items-center justify-center mt-6 bg-red-500">
-                <a href="?page=1"
-                    class="px-3 py-2 bg-gray-200 text-gray-700 rounded-md mr-2 hover:bg-gray-300 transition duration-300">&laquo;
-                    First</a>
-                <a href="?page={{ page.previous_page_number }}"
-                    class="px-3 py-2 bg-gray-200 text-gray-700 rounded-md mr-2 hover:bg-gray-300 transition duration-300">Previous</a>
-
-                {% for num in page.paginator.page_range %}
-                <a href="?page={{ num }}"
-                    class="px-3 py-2 bg-gray-200 text-gray-700 rounded-md mr-2 hover:bg-gray-300 transition duration-300 {% if page.number == num %}font-bold{% endif %}">
-                    {{ num }}</a>
-                {% endfor %}
-
-                <a href="?page={{ page.next_page_number }}"
-                    class="px-3 py-2 bg-gray-200 text-gray-700 rounded-md mr-2 hover:bg-gray-300 transition duration-300">Next</a>
-                <a href="?page={{ page.paginator.num_pages }}"
-                    class="px-3 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300">Last
-                    &raquo;</a>
-            </div>
-            {% endif %}
-
         </div>
     </div>
 </div>
