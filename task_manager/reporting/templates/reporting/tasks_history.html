@@ -3,27 +3,30 @@
 {% block content %}
 <style>
     .no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
+        display: none;
+    }
 
-/* Hide scrollbar for IE, Edge, and Firefox */
-.no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-}
+    /* Hide scrollbar for IE, Edge, and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
 </style>
-<div class="flex flex-col justify-start items-center bg-[#0a131a] text-slate-100 w-screen h-screen pt-6">
-    <div class="flex flex-row justify-center items-start w-4/6 bg-[#1d2e3e] h-4/5 rounded-lg">
-        <div class="flex flex-col justify-center items-center space-x-4 mt-5 text-black font-normal w-full">
-            <h2 class="text-[#9db8d1] mb-1 md:mb-5 mx-auto text-4xl font-black text-center">Tasks Done &#x1F44F
+<div class="flex flex-col justify-center items-center bg-[#0a131a] text-slate-100 w-screen md:h-[93.5vh] pt-6">
+    <div class="flex flex-row justify-center items-start w-4/6 bg-[#1d2e3e] md:h-[77vh] rounded-lg">
+        <div class="flex flex-col justify-center items-center space-x-4 text-black font-normal w-full">
+            <h2 class="text-[#9db8d1] my-2 md:mb-3 md:mt-4 mx-auto text-4xl font-black text-center">Tasks Done &#x1F44F
             </h2>
             <div class="border-t-2 border-[#20425e] w-1/3 mx-auto"></div>
             <div class="mx-auto py-10 flex justify-center px-3">
-                <div class="container h-[60vh] w-full shadow bg-inheret text-white rounded-md overflow-y-auto no-scrollbar">
+                <div
+                    class="container h-[60vh] w-full shadow bg-inheret text-white rounded-md overflow-y-auto no-scrollbar">
                     <table class="w-full h-4/5 bg-[#0d1c2a]">
                         <tbody class="border-2 border-slate-500">
                             {% for completed_task in page %}
-                            <tr class="relative transform scale-100 hover:cursor-pointer hover:bg-slate-800 hover:text-slate-100
+                            <tr class="relative transform scale-100 hover:cursor-pointer hover:bg-[#122230] group/item hover:text-slate-100
                                           text-xs py-1 border-b-2 border-slate-500 cursor-default">
                                 <td class="pl-5 pr-3 whitespace-no-wrap">
                                     <div class="text-gray-400">
@@ -37,7 +40,8 @@
                                 </td>
 
                                 <td class="px-2 py-2 whitespace-no-wrap">
-                                    <div class="leading-5 text-gray-500 font-mono font-light">
+                                    <div
+                                        class="leading-5 text-gray-500 group-hover/item:text-white font-mono font-light">
                                         {{ completed_task.category }}
                                     </div>
                                 </td>
