@@ -35,7 +35,7 @@
             <!--Submit button-->
             <button type="submit" class="bg-[#0d1c2a] text-[#9abad8] font-normal rounded-md p-1 hover:bg-green-700">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6 text-[#9abad8] hover:text-slate-100 transform hover:scale-110"
+                    class="h-6 w-6 fill-[#9abad8] hover:text-slate-100 transform hover:scale-110"
                     viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                     <path
                         d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
@@ -55,7 +55,7 @@
                 class="rounded-md p-1 outline-none font-light text-[#9abad8] bg-[#0d1c2a]">
             <button type="submit" class="bg-[#0d1c2a] text-[#9abad8] font-normal rounded-md p-1 hover:bg-green-700">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6 text-[#9abad8] hover:text-slate-100 transform hover:scale-110"
+                    class="h-6 w-6 fill-[#9abad8] hover:text-slate-100 transform hover:scale-110"
                     viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                     <path
                         d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
@@ -67,10 +67,10 @@
 </div>
 {% endblock %}
 {% block content %}
-<div class="container bg-inherit text-center text-2xl font-bold text-[#9abad8] md:w-screen mx-auto font-sans">
-    <div class="flex flex-row justify-around space-x-4 mt-5 text-black font-normal mx-auto">
-        <div class="col-md-4 w-4/12 rounded-xl border-2 hover:border-[#555f6e61] border-[#4a546330] bg-[#1c212840] hover:bg-[#1c2128] group duration-300">
-            <h2 class="mb-1 md:mb-5 text-[#88bcce]">To Do's</h2>
+<div class="container bg-inherit text-center text-2xl font-bold text-[#9abad8] md:mx-auto font-sans">
+    <div class="flex flex-row justify-around space-x-4 mt-5 text-black font-normal overflow-x-auto">
+        <div class="col-md-4 w-[55vh] rounded-xl border-2 hover:border-[#555f6e61] border-[#4a546330] bg-[#1c212840] hover:bg-[#1c2128] group duration-300">
+            <h2 class="my-2 md:mb-5 text-[#88bcce]">To Do's</h2>
             <div class="border-t-2 border-[#3b6674] w-1/2 mx-auto"></div>
             <p class="text-lg text-slate-500 font-sans mt-2">This task hasn't been started yet</p>
             <ul class="list-group md:h-[65vh] overflow-y-auto px-4 no-scrollbar md:mb-4">
@@ -104,8 +104,8 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="col-md-4 w-4/12 rounded-xl border-2 hover:border-[#555f6e61] border-[#4a546330] bg-[#1c212840] hover:bg-[#1c2128] group duration-300">
-            <h2 class="text-[#f9cb55] mb-1 md:mb-5">In Progress</h2>
+        <div class="col-md-4 w-[55vh] rounded-xl border-2 hover:border-[#555f6e61] border-[#4a546330] bg-[#1c212840] hover:bg-[#1c2128] group duration-300">
+            <h2 class="text-[#f9cb55] my-2 md:mb-5">In Progress</h2>
             <div class="border-t-2 border-[#9e7f31] w-1/2 mx-auto"></div>
             <p class="text-lg text-slate-500 font-sans mt-2">This task is currently in progress</p>
             <ul class="list-group md:h-[65vh] overflow-y-auto px-4 no-scrollbar md:mb-4">
@@ -138,10 +138,10 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="col-md-4 w-4/12 rounded-xl border-2 hover:border-[#555f6e61] border-[#4a546330] bg-[#1c212840] hover:bg-[#1c2128] group duration-300">
-            <h2 class="text-[#79c267] mb-1 md:mb-5">Completed</h2>
+        <div class="col-md-4 w-[55vh] rounded-xl border-2 hover:border-[#555f6e61] border-[#4a546330] bg-[#1c212840] hover:bg-[#1c2128] group duration-300">
+            <h2 class="text-[#79c267] my-2 md:mb-5">Completed</h2>
             <div class="border-t-2 border-[#205e38] w-1/2 mx-auto"></div>
-            <p class="text-lg text-slate-500 font-sans mt-2">This task has been completed</p>
+            <p class="text-lg text-slate-500 font-sans mt-2">This task has been completed today</p>
             <ul class="list-group md:h-[65vh] overflow-y-auto px-4 no-scrollbar md:mb-4
             ">
                 {% for task in tasks_completed %}
