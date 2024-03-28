@@ -31,6 +31,13 @@ def in_progress(request, id):
     return redirect('dashboard:index')
 
 @login_required
+def undo_progress(request, id):
+    task = Task.objects.get(id=id, user=request.user)
+    task.in_progress = not task.in_progress
+    task.save()
+    return redirect('dashboard:index')
+
+@login_required
 def completed(request, id):
     try:
         task = Task.objects.get(id=id, user=request.user)
