@@ -1,0 +1,15 @@
+{% include 'core/base.html' %}
+
+{% block content %}
+<div class="bg-inherit text-slate-200">
+    <div class="h-screen flex flex-col justify-center items-center">
+        <h1 class="text-8xl font-bold">404</h1>
+        <p class="text-4xl font-medium">Page Not Found</p>
+        {% if not user.is_authenticated %}
+        <a href="{% url 'accounts:login' %}" class="mt-4 text-xl text-blue-600 hover:underline">Login</a>
+        {% else %}
+        <a href="{% url 'dashboard:index' %}" class="mt-4 text-xl text-blue-600 hover:underline">Go back home</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
