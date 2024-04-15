@@ -4,35 +4,55 @@
 
 <head>
     <title>Task Manager</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 
 <body class="bg-[#202c3e] md:w-full">
-    <nav class="flex flex-col md:flex-row items-center bg-[#0d1c2a] p-3 text-slate-100">
-        <div class="flex flex-col md:flex-row justify-between items-center space-x-2 md:w-full">
-            <h1 class="text-2xl font-bold font-mono">Task Manager</h1>
-            <ul class="flex justify-end flex-col md:flex-row space-x-5">
-                <li class="hover:text-blue-500"><a href="{% url 'dashboard:index' %}">Dashboard</a></li>
-                <li class="hover:text-blue-500"><a href="{% url 'reporting:tasks_history' %}">History</a></li>
-                {% if user.is_authenticated %}                
-                <li class="text-slate-100">
-                    <a href="{% url 'accounts:logout' %}" class="text-slate-200 font-normal rounded-md py-2 px-3 w-30 bg-red-900 text-center">Logout</a>
-                </li>
-                {% else %}
-                <li class="text-slate-100">
-                    <a href="{% url 'accounts:login' %}" class="text-slate-200 font-normal rounded-md p-1 w-24 bg-blue-900 text-center">Login</a>
-                </li>
-                <li class="text-slate-100">
-                    <a href="{% url 'accounts:signup' %}" class="text-slate-200 font-normal rounded-md p-1 w-24 bg-blue-900 text-center">Register</a>
-                {% endif %}
-            </ul>
+    <header
+        class="lg:px-16 px-4 bg-[#0d1c2a] p-3 text-slate-100 flex flex-wrap items-center py-2 shadow-md sticky top-0 z-50">
+        <div class="flex-1 flex justify-between items-center">
+            <a href="{% url 'dashboard:index' %}" class="text-2xl font-bold font-mono">Task Manager</a>
         </div>
-        {% block dashboard %}
-        {% endblock %}
-    </nav>
+        <svg class="h-6 w-6 cursor-pointer md:hidden block"> </svg>
+        <!-- Hamburger Icon -->
+        <svg xmlns="<http://www.w3.org/2000/svg>" id="menu-button" class="h-6 w-6 cursor-pointer md:hidden block"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+
+        <div class="hidden w-full md:flex md:items-center md:w-auto" id="menu">
+            <nav>
+                <ul class="md:flex items-center justify-between text-slate-400 text-base md:pt-0">
+                    <li><a class="md:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-[#2f5170] hover:text-slate-50"
+                            href="{% url 'dashboard:index' %}">Dashboard</a></li>
+                    <li><a class="md:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-[#2f5170] hover:text-slate-50"
+                            href="{% url 'reporting:tasks_history' %}">History</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a class="md:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-red-600 hover:text-red-600"
+                            href="{% url 'accounts:logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a class="md:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-[#2f5170] hover:text-blue-500"
+                            href="{% url 'accounts:login' %}">Login</a></li>
+                    <li><a class="md:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-[#2f5170] hover:text-green-500"
+                            href="{% url 'accounts:signup' %}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
     {% block content %}
     {% endblock %}
+    <script>
+        const button = document.querySelector('#menu-button'); // Hamburger Icon
+        const menu = document.querySelector('#menu'); // Menu
+
+        button.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 
 </html>

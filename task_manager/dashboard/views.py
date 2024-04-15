@@ -8,6 +8,7 @@ from .models import Task, Category
 from reporting.models import CompletedTask
 from django.utils import timezone
 import time
+from .forms import CategoryForm, NewTaskForm
 
 @login_required
 def index(request):
@@ -20,6 +21,8 @@ def index(request):
         "tasks_completed": completed,
         "tasks_in_progress": in_progress,
         "categories": categories,
+        "task_form": NewTaskForm(),
+        "category_form": CategoryForm()
     }
     return render(request, 'dashboard/tasks_list.html', context)
 
@@ -63,15 +66,15 @@ def completed(request, id):
 @login_required
 def create(request):
     if request.method == 'POST':
-        title = request.POST['title']
-        if 'category' not in request.POST:
-            category = Category.objects.create(user=request.user)
-            category.save()
-            time.sleep(0.5)
-            Task.objects.create(title=title, category=category, user=request.user)
-        else:
-            Task.objects.create(title=title, category=Category.objects.get(id=request.POST['category']), user=request.user)
-    return redirect('dashboard:index')
+        form = NewTaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
+        return redirect('dashboard:index')
+    else:
+        form = NewTaskForm()
+    return render(request, 'dashboard/create_task.html', {'task_form': form})
 
 @login_required
 def update(request, id):
@@ -94,10 +97,15 @@ def reset_all(request):
 @login_required
 def new_category(request):
     if request.method == 'POST':
-        name = request.POST['category']
-        category = Category.objects.create(name=name, user=request.user)
-        category.save()
-    return redirect('dashboard:index')
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.user = request.user
+            category.save()
+        return redirect('dashboard:index')
+    else:
+        form = CategoryForm()
+    return render(request, 'dashboard/create_category.html', {'category_form': form})
 
 @staff_member_required
 def clear_categories(request):
