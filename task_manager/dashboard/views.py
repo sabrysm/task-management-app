@@ -68,9 +68,12 @@ def create(request):
     if request.method == 'POST':
         form = NewTaskForm(request.POST)
         if form.is_valid():
+            # Create a new task
             task = form.save(commit=False)
             task.user = request.user
+            task.category = Category.objects.get(id=request.POST.get('category'))
             task.save()
+        
         return redirect('dashboard:index')
     else:
         form = NewTaskForm()
