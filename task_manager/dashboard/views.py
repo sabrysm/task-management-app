@@ -12,7 +12,8 @@ from .forms import CategoryForm, NewTaskForm
 
 @login_required
 def index(request):
-    todos = Task.objects.filter(completed=False, in_progress=False, user=request.user)
+    # todos in reverse order
+    todos = Task.objects.filter(completed=False, in_progress=False, user=request.user).order_by('-created_at')
     completed = Task.objects.filter(completed=True, user=request.user).order_by('-completed_at').filter(completed_at__gte=timezone.now().replace(hour=0, minute=0, second=0, microsecond=0))
     in_progress = Task.objects.filter(in_progress=True, user=request.user)
     categories = Category.objects.filter(user=request.user)
