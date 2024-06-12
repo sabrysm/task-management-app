@@ -31,8 +31,8 @@
                                           text-xs py-1 border-b-2 border-slate-500 cursor-default">
                                 <td class="pl-5 pr-3 whitespace-no-wrap">
                                     <div class="text-gray-400">
-                                        {{ completed_task.completed_at|timezone:"Etc/GMT-2"|date:"l, F j, Y" }}</div>
-                                    <div>{{ completed_task.completed_at|timezone:"Etc/GMT-2"|date:"g:i A" }}</div>
+                                        {{ completed_task.completed_at|timezone:"Etc/GMT-3"|date:"l, F j, Y" }}</div>
+                                    <div>{{ completed_task.completed_at|timezone:"Etc/GMT-3"|date:"g:i A" }}</div>
                                 </td>
                                 <!--task title-->
                                 <td
